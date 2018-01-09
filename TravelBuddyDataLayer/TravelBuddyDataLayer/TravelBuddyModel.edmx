@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TravelBuddyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Airport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AiportCodeAndName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Function Name="my_spD_DeleteTravellerByTravellerID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="my_spD_Favorite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="my_spI_CreateNewTraveller" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="PasswordHash" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="my_spI_NewComment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+          <Parameter Name="DateCreated" Type="nvarchar" Mode="In" />
+          <Parameter Name="Comment" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="my_spI_NewFavorite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="my_spS_CheckIfTravellerUsernameExists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="my_spS_CommentsByLocationID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="my_spS_LocationByID_OrAllLocationsByNull" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="my_spS_LocationByName_OrAllLocationsByNull" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="my_spS_LocationCoordinatesByLocationID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="my_spS_TravellerByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="my_spS_TravellerFavoritesByTravellerID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="my_spS_VerifyTraveller" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="PasswordHash" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="my_spS_VerifyTravellerEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="my_spU_UpdateTravellerEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="my_spU_UpdateTravellerInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="my_spU_UpdateTravellerPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+          <Parameter Name="PasswordHash" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="my_spU_UpdateTravellerUsername" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TravellerID" Type="int" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="TravelBuddyModelStoreContainer">
+          <EntitySet Name="Airport" EntityType="Self.Airport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TravelBuddyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TravelBuddyEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="my_spS_LocationByName_OrAllLocationsByNull" ReturnType="Collection(TravelBuddyModel.my_spS_LocationByName_OrAllLocationsByNull_Result)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spS_VerifyTraveller" ReturnType="Collection(Int32)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="PasswordHash" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spI_CreateNewTraveller">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="PasswordHash" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spS_CheckIfTravellerUsernameExists" ReturnType="Collection(String)">
+          <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spU_UpdateTravellerEmail">
+            <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spU_UpdateTravellerInfo">
+            <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spU_UpdateTravellerPassword">
+            <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+            <Parameter Name="PasswordHash" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spU_UpdateTravellerUsername">
+            <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spS_VerifyTravellerEmail" ReturnType="Collection(String)">
+            <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spD_DeleteTravellerByTravellerID">
+          <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="my_spS_LocationByID_OrAllLocationsByNull" ReturnType="Collection(TravelBuddyModel.my_spS_LocationByID_OrAllLocationsByNull_Result)">
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="my_spS_CommentsByLocationID" ReturnType="Collection(TravelBuddyModel.my_spS_CommentsByLocationID_Result)">
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="my_spI_NewComment">
+            <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+            <Parameter Name="DateCreated" Mode="In" Type="String" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="my_spD_Favorite">
+            <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="my_spI_NewFavorite">
+            <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="my_spS_TravellerFavoritesByTravellerID" ReturnType="Collection(TravelBuddyModel.my_spS_TravellerFavoritesByTravellerID_Result)">
+          <Parameter Name="TravellerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="my_spS_LocationCoordinatesByLocationID" ReturnType="Collection(TravelBuddyModel.my_spS_LocationCoordinatesByLocationID_Result)">
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Airport" EntityType="TravelBuddyModel.Airport" />
+          <FunctionImport Name="my_spS_TravellerByUserName" ReturnType="Collection(TravelBuddyModel.my_spS_TravellerByUserName_Result)">
+          <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Country" EntityType="TravelBuddyModel.Country" />
+        </EntityContainer>
+        <ComplexType Name="my_spS_LocationByName_OrAllLocationsByNull_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ImageLink" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="my_spS_LocationByID_OrAllLocationsByNull_Result">
+          <Property Type="Int32" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ImageLink" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="my_spS_CommentsByLocationID_Result">
+          <Property Type="Int32" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="DateCreated" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Comment" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="my_spS_TravellerFavoritesByTravellerID_Result">
+          <Property Type="Int32" Name="TravellerID" Nullable="false" />
+          <Property Type="Int32" Name="LocationID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="my_spS_LocationCoordinatesByLocationID_Result">
+          <Property Type="Int32" Name="LocationID" Nullable="false" />
+          <Property Type="Decimal" Name="Latitude" Nullable="false" Precision="6" Scale="3" />
+          <Property Type="Decimal" Name="Longitude" Nullable="false" Precision="6" Scale="3" />
+          <Property Type="String" Name="AirportCode" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <EntityType Name="Airport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AiportCodeAndName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="my_spS_TravellerByUserName_Result">
+          <Property Type="Int32" Name="TravellerID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="254" />
+        </ComplexType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TravelBuddyModelStoreContainer" CdmEntityContainer="TravelBuddyEntities" >
+          <FunctionImportMapping FunctionImportName="my_spS_LocationByName_OrAllLocationsByNull" FunctionName="TravelBuddyModel.Store.my_spS_LocationByName_OrAllLocationsByNull">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TravelBuddyModel.my_spS_LocationByName_OrAllLocationsByNull_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="my_spS_VerifyTraveller" FunctionName="TravelBuddyModel.Store.my_spS_VerifyTraveller" />
+          <FunctionImportMapping FunctionImportName="my_spI_CreateNewTraveller" FunctionName="TravelBuddyModel.Store.my_spI_CreateNewTraveller" />
+          <FunctionImportMapping FunctionImportName="my_spS_CheckIfTravellerUsernameExists" FunctionName="TravelBuddyModel.Store.my_spS_CheckIfTravellerUsernameExists" />
+          <FunctionImportMapping FunctionImportName="my_spU_UpdateTravellerEmail" FunctionName="TravelBuddyModel.Store.my_spU_UpdateTravellerEmail" />
+          <FunctionImportMapping FunctionImportName="my_spU_UpdateTravellerInfo" FunctionName="TravelBuddyModel.Store.my_spU_UpdateTravellerInfo" />
+          <FunctionImportMapping FunctionImportName="my_spU_UpdateTravellerPassword" FunctionName="TravelBuddyModel.Store.my_spU_UpdateTravellerPassword" />
+          <FunctionImportMapping FunctionImportName="my_spU_UpdateTravellerUsername" FunctionName="TravelBuddyModel.Store.my_spU_UpdateTravellerUsername" />
+          <FunctionImportMapping FunctionImportName="my_spS_VerifyTravellerEmail" FunctionName="TravelBuddyModel.Store.my_spS_VerifyTravellerEmail" />
+          <FunctionImportMapping FunctionImportName="my_spD_DeleteTravellerByTravellerID" FunctionName="TravelBuddyModel.Store.my_spD_DeleteTravellerByTravellerID" />
+          <FunctionImportMapping FunctionImportName="my_spS_LocationByID_OrAllLocationsByNull" FunctionName="TravelBuddyModel.Store.my_spS_LocationByID_OrAllLocationsByNull">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TravelBuddyModel.my_spS_LocationByID_OrAllLocationsByNull_Result">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="my_spS_CommentsByLocationID" FunctionName="TravelBuddyModel.Store.my_spS_CommentsByLocationID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TravelBuddyModel.my_spS_CommentsByLocationID_Result">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="my_spI_NewComment" FunctionName="TravelBuddyModel.Store.my_spI_NewComment" />
+          <FunctionImportMapping FunctionImportName="my_spD_Favorite" FunctionName="TravelBuddyModel.Store.my_spD_Favorite" />
+          <FunctionImportMapping FunctionImportName="my_spI_NewFavorite" FunctionName="TravelBuddyModel.Store.my_spI_NewFavorite" />
+          <FunctionImportMapping FunctionImportName="my_spS_TravellerFavoritesByTravellerID" FunctionName="TravelBuddyModel.Store.my_spS_TravellerFavoritesByTravellerID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TravelBuddyModel.my_spS_TravellerFavoritesByTravellerID_Result">
+                <ScalarProperty Name="TravellerID" ColumnName="TravellerID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="my_spS_LocationCoordinatesByLocationID" FunctionName="TravelBuddyModel.Store.my_spS_LocationCoordinatesByLocationID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TravelBuddyModel.my_spS_LocationCoordinatesByLocationID_Result">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="AirportCode" ColumnName="AirportCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Airport">
+            <EntityTypeMapping TypeName="TravelBuddyModel.Airport">
+              <MappingFragment StoreEntitySet="Airport">
+                <ScalarProperty Name="AiportCodeAndName" ColumnName="AiportCodeAndName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="my_spS_TravellerByUserName" FunctionName="TravelBuddyModel.Store.my_spS_TravellerByUserName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TravelBuddyModel.my_spS_TravellerByUserName_Result">
+                <ScalarProperty Name="TravellerID" ColumnName="TravellerID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="TravelBuddyModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Country1" ColumnName="Country" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
